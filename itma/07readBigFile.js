@@ -14,7 +14,7 @@ stream.on('open', function (fd) {
 
 let i = 0;
 stream.on('data', function (trunk) {
-    console.log('接受数据', i, '块：', trunk);
+    console.log('接受数据第%d', i, '块：', trunk);
     i++;
 })
 
