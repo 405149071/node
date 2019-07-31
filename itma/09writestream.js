@@ -8,7 +8,7 @@ let ws = fs.createWriteStream(afilePath, {
     flags: 'a'
 });
 
-ws.on('open', function () {
+ws.on('open', function (fd) {
     console.log("可写流打开")
 })
 
