@@ -9,8 +9,8 @@
 </head>
 
 <body>
-    用户的列表
-
+    用户的列表 <br />
+    {{name}}:{{title}}
 </body>
 
 </html>
