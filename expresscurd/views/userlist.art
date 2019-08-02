@@ -11,6 +11,10 @@
 <body>
     用户的列表 <br />
     {{name}}:{{title}}
+
+    {{each users as val index}}
+    <p>{{index}}---{{val.id}}-----{{val.name}}</p>
+    {{/each}}
 </body>
 
 </html>
