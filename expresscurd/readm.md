@@ -15,5 +15,11 @@ npm install -P express-art-template
 2.项目中设置express的应用
 art-template模版引擎
 
+## mock.js
+1 .引入
+```shell
+npm install -D mockjs
+```
+
 
    
