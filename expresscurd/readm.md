@@ -26,6 +26,12 @@ npm install -D mockjs
 npm install --global mocha
 ```
 
+## should.js 断言库
+```shell
+npm install should -P
+```
+
+
 
 
    
