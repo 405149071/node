@@ -36,7 +36,8 @@ describe('userService服务测试', function () {
         assert.equal(Array.isArray(data.users), true);
         //异常
         const edata = userService.getPageUsers(2, "fafa10");
-        assert.equal(edata.users.length, 10);
-        assert.equal(Array.isArray(edata.users), true);
+        // assert.equal(edata.users.length, 10);
+        // assert.equal(Array.isArray(edata.users), true);
+        assert.equal(edata.code, 0);
     })
 })

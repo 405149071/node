@@ -14,6 +14,20 @@ exports.getUsers = function () {
 
 //分页数据
 exports.getPageUsers = function (page, size) {
+    if (typeof (page) != 'number' || page <= 0) {
+        return {
+            code: 0,
+            msg: "page参数不符合条件"
+        }
+    }
+
+    if (typeof (size) != 'number' || size <= 0) {
+        return {
+            code: 0,
+            msg: "size参数不符合条件"
+        }
+    }
+
     return {
         users: dbjson.users.slice((page - 1) * size, page * size),
         code: 1,
