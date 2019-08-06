@@ -50,6 +50,16 @@ app.get("/user/list", (req, res) => {
 
 })
 
+// 添加用户
+app.get("/user/add", (req, res) => {
+    res.render("users/add.art");
+})
+
+
+app.post("/user/add", (req, res) => {
+    // res.send("ok")  // 给页面发送数据
+    res.redirect("/user/list") // 跳转页面
+})
 
 app.listen(59999, function () {
     console.log("http://127.0.0.1:59999")
