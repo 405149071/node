@@ -22,7 +22,7 @@ let data = mock.mock({
         "id|+1": 10000,
         "name": "@cname",
         "email": "@email",
-        "phone": "@natural(13200000000,13399999999",
+        "phone": "@natural(13200000000,13399999999)",
         "address": "@county(true)",
         "zip": "@zip"
     }]

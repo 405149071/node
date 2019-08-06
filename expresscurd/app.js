@@ -32,11 +32,22 @@ app.get("/user/list", (req, res) => {
     // })
 
     // uses 数据从service层取得
-    res.render("userlist.art", {
-        name: "zhangsan",
-        title: "你好啊！",
-        users: userService.getUsers()
+    // res.render("userlist.art", {
+    //     name: "zhangsan",
+    //     title: "你好啊！",
+    //     users: userService.getUsers()
+    // })
+
+    // 取分页数据
+    const page = parseInt(req.query.page) || 1;
+    const size = parseInt(req.query.size) || 10;
+    // console.log(page, size, "11111")
+    const data = userService.getPageUsers(page, size);
+    // console.log(data, "22222")
+    res.render("users/userlist.art", {
+        users: data.users
     })
+
 })
 
 
