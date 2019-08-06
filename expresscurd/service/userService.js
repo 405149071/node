@@ -13,4 +13,10 @@ exports.getUsers = function () {
 }
 
 //分页数据
-exports.getPageUsers = function (page, size) {}
+exports.getPageUsers = function (page, size) {
+    return {
+        users: dbjson.users.slice((page - 1) * size, page * size),
+        code: 1,
+        msg: "获取数据成功",
+    }
+}

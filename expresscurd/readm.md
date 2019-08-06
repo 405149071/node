@@ -21,5 +21,11 @@ art-template模版引擎
 npm install -D mockjs
 ```
 
+## mocha 单元测试
+```shell
+npm install --global mocha
+```
+
+
 
    

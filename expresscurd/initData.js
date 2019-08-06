@@ -28,8 +28,10 @@ let data = mock.mock({
     }]
 })
 
-jsondb.users.push(...data.users)
-
+// 追加数据
+// jsondb.users.push(...data.users)
+// 替换数据，
+jsondb.users = data.users;
 
 // 数据写入到dbjson中去
 fs.writeFileSync(path.join(__dirname, "db.json"), JSON.stringify(jsondb), {
