@@ -1,11 +1,24 @@
 const express = require("express")
 const path = require("path")
+var bodyParser = require('body-parser');
+var multer = require('multer'); // v1.0.5
+
 const art_express = require("express-art-template")
 
 // 加载service文件
 const userService = require("./service/userService.js")
 // console.log(userService.getUsers());
 const app = express()
+
+// 设置接收中间件
+app.use(bodyParser.json()); // for parsing application/json
+app.use(bodyParser.urlencoded({ // 默认把表单数据处理到req.body中
+    extended: true
+})); // for parsing application/x-www-form-urlencoded
+
+// 创建upload对象，用于处理上传文件之类的form-data
+var upload = multer(); // for parsing multipart/form-data
+
 // 设置art-template
 app.engine("art", art_express);
 
@@ -56,8 +69,18 @@ app.get("/user/add", (req, res) => {
 })
 
 
-app.post("/user/add", (req, res) => {
+app.post("/user/add", upload.array(), (req, res) => {
+    // req的数据的三种方式
+    // 1）req.query url中的参数
+    // 2） req.param 路由中的
+    // 3) req.body  获取表单的参数，默认参数没有，需要引入body-parse  form的enctype=urldecode的方式
+    // 如果enctype=form-data的时候需要用multer中间件
     // res.send("ok")  // 给页面发送数据
+    console.log("----------------req begin----------------")
+    console.log(req.body); //同样
+    console.dir(req.body); //同样
+    console.dir("name=", req.body.name);
+    console.log("----------------req end----------------")
     res.redirect("/user/list") // 跳转页面
 })
 
