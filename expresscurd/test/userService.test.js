@@ -55,4 +55,22 @@ describe('userService服务测试', function () {
         });
     })
 
+    it("#delUser() should.js", function () {
+        const t = userService.delUser(20000);
+        t.should.eqls({
+            msg: "删除成功",
+            code: 1,
+        })
+
+        userService.delUser("afefefef").should.eqls({
+            code: 0,
+            msg: "用户名不能为空"
+        })
+
+        userService.delUser(0).should.eqls({
+            code: 0,
+            msg: "用户名不能为空"
+        })
+    })
+
 })

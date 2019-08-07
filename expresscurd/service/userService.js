@@ -63,6 +63,27 @@ exports.addUser = function (user) {
     }
 }
 
+//删除用户
+exports.delUser = function (id) {
+    // 判断user对象的数据是否合法
+    if (typeof (id) != "number" || id < 1) {
+        return {
+            code: 0,
+            msg: "用户名不能为空"
+        }
+    }
+    // user.id = Date.now();
+    const index = dbjson.users.findIndex(u => u.id == id);
+    console.log(index, "找到要删除的用户id")
+    // 把数据存储到json文件中
+    dbjson.users.splice(index, 1)
+    _saveJson(dbjson);
+    return {
+        msg: "删除成功",
+        code: 1,
+    }
+}
+
 // 把对象转成json，并保存到db中
 function _saveJson(jsonData) {
     const strJson = JSON.stringify(jsonData);

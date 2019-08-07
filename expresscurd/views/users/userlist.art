@@ -8,6 +8,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="https://cdn.bootcss.com/bulma/0.7.5/css/bulma.css">
 
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
 </head>
 
 <body>
@@ -23,6 +24,7 @@
                 <td>电话</td>
                 <td>邮编</td>
                 <td>地址</td>
+                <td>操作</td>
             </tr>
         </thead>
         <tbody>
@@ -33,11 +35,27 @@
                 <td>{{val.phone}}</td>
                 <td>{{val.email}}</td>
                 <td>{{val.address}}</td>
+                <td><a class="del" uid={{val.id}} href="/user/del?id={{val.id}}">删除</a></td>
             </tr>
             {{/each}}
         </tbody>
     </table>
 
+    <script>
+        //给删除的按钮绑定事件
+        $(function () {
+            $(".del").on("click", function (e) {
+                if (confirm("确认要删除数据码？")) {
+                    // 
+                } else {
+                    // e.stopPropagation();
+                    // e.preventDefault();
+                    // 或者返回false
+                    return false;
+                }
+            })
+        })
+    </script>
 </body>
 
 </html>

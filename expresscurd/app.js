@@ -63,13 +63,13 @@ app.get("/user/list", (req, res) => {
 
 })
 
-// 添加用户
+// 添加用户，显示表单
 app.get("/user/add", (req, res) => {
     res.render("users/add.art");
 
 })
 
-
+// 添加用户
 app.post("/user/add", upload.array(), (req, res) => {
     // req的数据的三种方式
     // 1）req.query url中的参数
@@ -85,6 +85,18 @@ app.post("/user/add", upload.array(), (req, res) => {
     // 保存
     userService.addUser(req.body)
     res.redirect("/user/list") // 跳转页面
+})
+
+// 删除用户
+app.get("/user/del", (req, res) => {
+    // res.send(req.query.id);
+    const r = userService.delUser(parseInt(req.query.id));
+    // console.log(r);
+    if (r.code == 1) {
+        res.redirect("/user/list") // 跳转页面
+    } else {
+        res.send(r);
+    }
 })
 
 app.listen(59999, function () {
