@@ -5,6 +5,9 @@
 // 加载json文件模块
 const dbjson = require("../db.json")
 
+const path = require("path")
+const fs = require("fs")
+
 // 获取所有用户数据
 exports.getUsers = function () {
     // if (dbjson || dbjson.users)
@@ -33,4 +36,37 @@ exports.getPageUsers = function (page, size) {
         code: 1,
         msg: "获取数据成功",
     }
+}
+
+// 添加用户数据
+exports.addUser = function (user) {
+    // 判断user对象的数据是否合法
+    if (!user.name) {
+        return {
+            code: 0,
+            msg: "用户名不能为空"
+        }
+    }
+
+    // user.id = Date.now();
+    // 把多个对象合并成一个对象
+    const newUser = Object.assign({
+            id: Date.now()
+        },
+        user)
+    // 把数据存储到json文件中
+    dbjson.users.push(newUser);
+    _saveJson(dbjson);
+    return {
+        msg: "保存成功",
+        code: 1,
+    }
+}
+
+// 把对象转成json，并保存到db中
+function _saveJson(jsonData) {
+    const strJson = JSON.stringify(jsonData);
+    fs.writeFileSync(path.join(__dirname, "../db.json"), strJson, {
+        encoding: 'utf8'
+    })
 }

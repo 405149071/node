@@ -66,6 +66,7 @@ app.get("/user/list", (req, res) => {
 // 添加用户
 app.get("/user/add", (req, res) => {
     res.render("users/add.art");
+
 })
 
 
@@ -81,6 +82,8 @@ app.post("/user/add", upload.array(), (req, res) => {
     console.dir(req.body); //同样
     console.dir("name=", req.body.name);
     console.log("----------------req end----------------")
+    // 保存
+    userService.addUser(req.body)
     res.redirect("/user/list") // 跳转页面
 })
 
