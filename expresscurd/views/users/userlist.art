@@ -45,7 +45,7 @@
         //给删除的按钮绑定事件
         $(function () {
             $(".del").on("click", function (e) {
-                if (confirm("确认要删除数据码？")) {
+                if (confirm("确认要删除数据码？" + $(this).attr("uid"))) {
                     // 
                 } else {
                     // e.stopPropagation();
