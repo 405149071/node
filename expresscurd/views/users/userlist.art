@@ -9,6 +9,10 @@
     <link rel="stylesheet" href="https://cdn.bootcss.com/bulma/0.7.5/css/bulma.css">
 
     <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/simplePagination.js/1.6/jquery.simplePagination.min.js"></script>
+    <!-- <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet"> -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/simplePagination.js/1.6/simplePagination.css">
+
 </head>
 
 <body>
@@ -44,12 +48,14 @@
         </tbody>
     </table>
 
+    <div class="page1"></div>
+
     <script>
         //给删除的按钮绑定事件
         $(function () {
             $(".del").on("click", function (e) {
                 if (confirm("确认要删除数据码？" + $(this).attr("uid"))) {
-                    // 
+                    //
                 } else {
                     // e.stopPropagation();
                     // e.preventDefault();
@@ -57,6 +63,18 @@
                     return false;
                 }
             })
+
+            $(".page1").pagination({
+                currentPage: "{{page}}",
+                items: "{{items}}",
+                itemsOnPage: 10,
+                cssStyle: 'light-theme',
+                prevText: "上一页",
+                nextText: "下一页",
+                onPageClick: function (pageNumber, event) {
+                    window.location.href = "/user/list?page=" + pageNumber + "&size=10"
+                }
+            });
         })
     </script>
 </body>

@@ -58,7 +58,9 @@ app.get("/user/list", (req, res) => {
     const data = userService.getPageUsers(page, size);
     // console.log(data, "22222")
     res.render("users/userlist.art", {
-        users: data.users
+        users: data.users,
+        page: req.query.page,
+        items: data.count,
     })
 
 })
