@@ -71,6 +71,17 @@ describe('userService服务测试', function () {
             code: 0,
             msg: "用户名不能为空"
         })
+
+
+    })
+
+    it("#getuserbyid()", function () {
+        should(userService.getUserById(-8)).be.Null();
+        should(userService.getUserById('898')).be.Null();
+
+        should(userService.getUserById(10000)).be.containEql({
+            id: 10000
+        })
     })
 
 })

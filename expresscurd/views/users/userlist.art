@@ -35,7 +35,10 @@
                 <td>{{val.phone}}</td>
                 <td>{{val.email}}</td>
                 <td>{{val.address}}</td>
-                <td><a class="del" uid={{val.id}} href="/user/del?id={{val.id}}">删除</a></td>
+                <td>
+                    <a class="del" uid={{val.id}} href="/user/del?id={{val.id}}">删除</a>
+                    <a class="edit" uid={{val.id}} href="/user/edit?id={{val.id}}">修改</a>
+                </td>
             </tr>
             {{/each}}
         </tbody>

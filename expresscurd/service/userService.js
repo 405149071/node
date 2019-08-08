@@ -84,6 +84,36 @@ exports.delUser = function (id) {
     }
 }
 
+// 取得单个用户信息
+exports.getUserById = function (id) {
+    if (typeof (id) == "number" && id > 0) {
+        return dbjson.users.find(u => u.id == id)
+    }
+    return null;
+}
+
+
+exports.editUser = function (user) {
+    console.log(user, "service收到的数据");
+    // 判断user对象的数据是否合法
+    if (typeof (user.id) == "" || parseInt(user.id) < 1) {
+        return {
+            code: 0,
+            msg: "用户名不能为空"
+        }
+    }
+    // user.id = Date.now();
+    const index = dbjson.users.findIndex(u => u.id == user.id);
+    console.log(index, "找到要修改的用户id")
+    // 把数据存储到json文件中
+    dbjson.users.splice(index, 1, user)
+    _saveJson(dbjson);
+    return {
+        msg: "修改成功",
+        code: 1,
+    }
+}
+
 // 把对象转成json，并保存到db中
 function _saveJson(jsonData) {
     const strJson = JSON.stringify(jsonData);

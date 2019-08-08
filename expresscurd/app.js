@@ -99,6 +99,29 @@ app.get("/user/del", (req, res) => {
     }
 })
 
+// 修改用户 显示数据
+app.get("/user/edit", (req, res) => {
+    const user = userService.getUserById(parseInt(req.query.id))
+    if (user == null) {
+        res.redirect("/user/list")
+    }
+    res.render("users/edit.art", user)
+})
+
+
+app.post("/user/edit", upload.array(), (req, res) => {
+    console.log(req.body, "1111");
+    const user = userService.getUserById(parseInt(req.body.id))
+    console.log(user, "22222");
+    if (user == null) {
+        res.redirect("/user/list")
+    } else {
+        const r = userService.editUser(req.body);
+        console.log(r)
+        res.redirect("/user/list")
+    }
+})
+
 app.listen(59999, function () {
     console.log("http://127.0.0.1:59999")
 })
