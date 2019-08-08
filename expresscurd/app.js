@@ -105,18 +105,22 @@ app.get("/user/edit", (req, res) => {
     if (user == null) {
         res.redirect("/user/list")
     }
+    console.log(user, "uuuuuu")
     res.render("users/edit.art", user)
 })
 
 
-app.post("/user/edit", upload.array(), (req, res) => {
+app.post("/user/edit", (req, res) => {
     console.log(req.body, "1111");
-    const user = userService.getUserById(parseInt(req.body.id))
+    // const user = userService.getUserById(parseInt(req.body.id))
+    const user = Object.assign({}, req.body, {
+        id: parseInt(req.body.id)
+    })
     console.log(user, "22222");
     if (user == null) {
         res.redirect("/user/list")
     } else {
-        const r = userService.editUser(req.body);
+        const r = userService.editUser(user);
         console.log(r)
         res.redirect("/user/list")
     }
