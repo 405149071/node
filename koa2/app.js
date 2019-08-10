@@ -2,6 +2,11 @@
 var Koa = require("koa")
 var router = require("koa-router")()
 
+// ejs 模版引擎
+// 1. npm install koa-views --save
+// 2. npm install ejs --save
+// 3. app.use(views(__dirname,{extension:"ejs"}))
+// 4. await ctx.render("index")
 
 var app = new Koa()
 
