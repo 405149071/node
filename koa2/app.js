@@ -1,26 +1,16 @@
 //引入koa
-var Koa = require("koa"),
-    router = require("koa-router")(),
-    views = require("koa-views")
+var Koa = require("koa")
+var router = require("koa-router")()
+
 
 var app = new Koa()
-
-app.use(views("views", {
-    extension: "ejs"
-}))
 
 router.get("/", async (ctx) => {
     ctx.body = "首页"
 })
 
 router.get("/news", async (ctx) => {
-    // ctx.body = "这是一个新闻页面"
-    await ctx.render("user")
-})
-
-router.post("/doAdd", async (ctx) => {
-    // 获取post表单数据
-
+    ctx.body = "这是一个新闻页面"
 })
 
 // 动态路由
