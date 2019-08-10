@@ -1,41 +1,57 @@
 //引入koa
 var Koa = require("koa"),
+    path = require("path"),
     router = require("koa-router")(),
-    views = require("koa-views"),
+    render = require('koa-art-template'),
     bodyParser = require("koa-bodyparser"),
     static = require("koa-static")
 
+
+// art-template
+// 1 安装
+// npm install --save art-template
+// npm install --save koa-art-template
+// 2 .引入 
+// const render = require("koa-art-template")
+// 3. render(app,{root:path.join(__dirname,'view',
+//  extname : '.art',
+//  debug:process.env.NODE_ENV !== 'production')})
+
+// 4 使用
+// await ctx.render('user')
+
 var app = new Koa()
 
-
-
-app.use(views("views", {
-    extension: "ejs"
-}))
-
+// 配置模版引擎
+render(app, {
+    root: path.join(__dirname, 'views'),
+    extname: '.html',
+    debug: process.env.NODE_ENV !== 'production'
+})
 
 // 配置中间件
-// http://127.0.0.1/css/css.css 首先去static目录找，如果能找到则返回对应的文件，不能则继续next
-app.use(static("static")) // 目录一个
 
 // 配置post bodyparser的中间件
 app.use(bodyParser())
 
 
 router.get("/", async (ctx) => {
-    ctx.body = "首页"
+    // ctx.body = "首页"
+    await ctx.render("index")
 })
 
 router.get("/news", async (ctx) => {
     // ctx.body = "这是一个新闻页面"
-    await ctx.render("user")
-})
+    let list = {
+        name: "张三",
+        h: "<h2>这是一个h2</h2>",
+        num: 20,
+        data: ["1111", "2222", "3333"],
+    }
 
-router.post("/doAdd", async (ctx) => {
-    // 获取post表单数据
-    console.log(ctx.request.body)
-    // 获取表单提交数据
-    ctx.body = ctx.request.body
+    await ctx.render("news", {
+        list: list
+    })
 })
 
 // 动态路由
