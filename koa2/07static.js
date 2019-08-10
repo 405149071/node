@@ -7,7 +7,11 @@ var Koa = require("koa"),
 
 var app = new Koa()
 
-
+// koa -static 静态资源中间件
+// npm install koa-static --save
+// 2,引入 const static  require("koa-static")
+// 3 配置中间件
+//app.use(static('static'))
 
 app.use(views("views", {
     extension: "ejs"
