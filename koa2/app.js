@@ -1,11 +1,14 @@
 //引入koa
 var Koa = require("koa")
 var router = require("koa-router")()
-
+const DB = require("./module/db.js")
 
 var app = new Koa()
 
 router.get("/", async (ctx) => {
+    // 取得数据
+    var r = await DB.find("user", {});
+    console.log(r);
     ctx.body = "首页"
 })
 
