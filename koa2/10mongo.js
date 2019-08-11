@@ -2,6 +2,54 @@
 var Koa = require("koa")
 var router = require("koa-router")()
 
+// 安装
+// npm install mongodb --save
+// 2 引入 mongodb下的mongoclient
+// var mongoclient = require("mongodb").MongoClient;
+// 3 定义数据库连接的地址以及配置数据库
+// koa 数据库的名称
+// var url ="mongodb://localhost:27017/";
+// var dbName = "koa"
+
+//4. nodejs 连接数据库
+// mongoClicent.connect(url,fun(err,client){
+
+//})
+//5 操作数据库
+
+var MongoClient = require("mongodb").MongoClient
+
+var dbURL = "mongodb://localhost:27017/"
+
+var dbName = "test";
+
+MongoClient.connect(dbURL, function (err, client) {
+    if (err) {
+        console.log(err);
+        return;
+    }
+
+    var db = client.db(dbName);
+
+    //add 数据
+    db.collection("user").insertOne({
+        'username': "里流",
+        "age": 21
+    }, function (err, result) {
+        if (!err) {
+            console.log("增加成功")
+            client.close()
+        }
+
+    });
+
+    // 查询数据
+    var result = db.collection('user').find({});
+    result.toArray((err, docs) => {
+        console.log(docs);
+    })
+
+})
 
 var app = new Koa()
 
