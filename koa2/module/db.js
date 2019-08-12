@@ -25,11 +25,11 @@ class Db {
                         console.log(err);
                         reject(err)
                         return;
-                    } else {
-                        var db = client.db(Config.dbName)
-                        _that.dbClient = db;
-                        resolve(_that.dbClient)
                     }
+                    var db = client.db(Config.dbName)
+                    _that.dbClient = db;
+                    resolve(_that.dbClient)
+
                 })
             } else {
                 resolve(_that.dbClient)
@@ -55,6 +55,52 @@ class Db {
         })
 
     }
+
+    insert(collectionName, json) {
+        return new Promise((resolve, reject) => {
+            this.connect().then((db) => {
+                db.collection(collectionName).insertOne(json, (err, result) => {
+                    if (err) {
+                        reject(err);
+                        return;
+                    }
+                    resolve(result);
+                })
+            })
+        })
+    }
+
+    update(collectionName, conJson, dataJson) {
+        return new Promise((resolve, reject) => {
+            this.connect().then((db) => {
+                db.collection(collectionName).updateOne(conJson, {
+                    $set: dataJson
+                }, (err, result) => {
+                    if (err) {
+                        reject(err);
+                        return;
+                    }
+                    resolve(result);
+                })
+            })
+        })
+    }
+
+    delete(collectionName, json) {
+        return new Promise((resolve, reject) => {
+            this.connect().then((db) => {
+                db.collection(collectionName).removeOne(json, (err, result) => {
+                    if (err) {
+                        reject(err);
+                        return;
+                    }
+                    resolve(result);
+                })
+            })
+        })
+    }
+
+
 }
 
 // demo
